@@ -12,10 +12,14 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import csv
 import os 
+from decouple import config
 from basic import login
 
+user = config('sinide_user')
+password = config('sinide_password')
+site = config('sinide_url')
 
-driver =login("27146440946","SGE27146440946","https://sge.salta.gob.ar/ui/#!/login")
+driver =login(user, password, site)
 os.system("cls")
 dniNoFound = []
 with open("migrate.csv", "r") as f:
