@@ -14,7 +14,7 @@ import csv
 import os 
 from basic import login
 
-driver =login("","SGE","https://sge.salta.gob.ar/ui/#!/login")
+driver =login("27146440946","SGE27146440946","https://sge.salta.gob.ar/ui/#!/login")
 os.system("cls")
 listNoFind = []
 with open("migrate.csv", "r") as f:
@@ -22,8 +22,8 @@ with open("migrate.csv", "r") as f:
     print("Start data enter")
     driver.get("https://sge.salta.gob.ar/ui/#!/home/unidad/18239/organizacionCursada/titulacion/")
     input("si cargo el site, presione enter \n")
-    classroom = "https://sge.salta.gob.ar/ui/#!/home/unidad/18239/inscripciones/titulacion/division/29073/titulaciones"
-    listStuden = "https://sge.salta.gob.ar/ui/#!/home/unidad/18239/inscripcion/titulacion/29073///titulacionUnidadServicio/145/gradoNivelServicio/22/inscribir"
+    classroom = "https://sge.salta.gob.ar/ui/#!/home/unidad/18239/inscripciones/titulacion/division/29069/titulaciones"
+    listStuden = "https://sge.salta.gob.ar/ui/#!/home/unidad/18239/inscripcion/titulacion/29069///titulacionUnidadServicio/145/gradoNivelServicio/23/inscribir"
     driver.get(classroom)
     time.sleep(6)
     button_element = driver.find_element(By.XPATH,'//*[@id="$index"]')    
