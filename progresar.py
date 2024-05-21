@@ -38,6 +38,7 @@ def loginProg(site, city, school, password):
 
 def main():    
     loginProg(site, city, school, password)
+    listNoFind = []
     with open("migrate.csv", "r") as f:
         os.system("cls")
         lector = csv.reader(f)
@@ -61,13 +62,14 @@ def main():
                    
             except:
                 print("No se pudo cargar el DNI")
+                listNoFind.append(element)
             time.sleep(1)
             try:                               
                 input_element = driver.find_element(By.XPATH, '//*[@id="es_alumno_regular'+val+'"]/option[2]')
                 input_element.click()
                 
             except:
-                print("Error en la admicion de progresar")             
+                print("Error en la admicion de progresar")                          
 
             button_element = driver.find_element(By.XPATH,'//*[@id="Form2"]/center/button')    
             button_element.click()
@@ -79,4 +81,8 @@ def main():
                 input_element = driver.find_element(By.XPATH, '/html/body/div/a')
                 input_element.click()
             
+    print(listNoFind)
+    with open("listNoFound.csv", "w") as archivo:
+        for elemento in listNoFind:
+            archivo.write(f"{elemento}\n")
 main()

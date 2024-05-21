@@ -23,3 +23,17 @@ def login(user, password, site):
     print("Start Data Enter Process")
     time.sleep(5)
     return driver
+
+def selenium_input(identify="", value="",by="XPATH"):
+     try:
+        input_element = driver.find_element("By."+by, identify)
+        input_element.send_keys(value)
+     except:
+        print("Error in "+ identify)
+
+def selenium_Button(identify="",by="XPATH"):
+    try:
+        button_element = driver.find_element("By."+by,identify)    
+        button_element.click()
+    except:
+        print("Error in "+ identify)
