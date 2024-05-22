@@ -12,7 +12,7 @@ driver = webdriver.Chrome()
 def login(user, password, site):
     driver.get(site)
     driver.implicitly_wait(0.5)
-    input("presione luego de carga login")
+    input("presione luego de carga login \n")
     input_element = driver.find_element(By.ID, value="login-usuario")
     input_element.send_keys(user)
     input_element = driver.find_element(By.ID, value="login-contrasenia")
@@ -26,14 +26,37 @@ def login(user, password, site):
 
 def selenium_input(identify="", value="",by="XPATH"):
      try:
-        input_element = driver.find_element("By."+by, identify)
+        if(by=="XPATH"):        
+            input_element = driver.find_element(By.XPATH, identify)            
+        
+        if(by=="ID"):
+            input_element = driver.find_element(By.ID, identify)
+            
+        
+        if(by=="NAME"):
+            input_element = driver.find_element(By.NAME, identify)
+
         input_element.send_keys(value)
+        return True
+
      except:
         print("Error in "+ identify)
+        #input()
+        return False
 
 def selenium_Button(identify="",by="XPATH"):
     try:
-        button_element = driver.find_element("By."+by,identify)    
+        if(by=="XPATH"): 
+            button_element = driver.find_element(By.XPATH, identify)
+        
+        if(by=="ID"):
+            button_element = driver.find_element(By.ID, identify)
+
+        if(by=="NAME"):
+            button_element = driver.find_element(By.NAME, identify)
         button_element.click()
+        return True
     except:
         print("Error in "+ identify)
+        #input()
+        return False

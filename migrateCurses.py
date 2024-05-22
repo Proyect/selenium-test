@@ -13,77 +13,64 @@ import time
 import csv
 import os
 from decouple import config 
-from basic import login
+from basic import *
 
 user = config('sinide_user')
 password = config('sinide_password')
 site = config('sinide_url')
 
-driver =login(user, password, site)
-os.system("cls")
-listNoFind = []
-with open("migrate.csv", "r") as f:
-    lector = csv.reader(f)
-    print("Start data enter")
-    driver.get("https://sge.salta.gob.ar/ui/#!/home/unidad/18239/organizacionCursada/titulacion/")
-    input("si cargo el site, presione enter \n")
-    classroom = "https://sge.salta.gob.ar/ui/#!/home/unidad/18239/inscripciones/titulacion/division/29069/titulaciones"
-    listStuden = "https://sge.salta.gob.ar/ui/#!/home/unidad/18239/inscripcion/titulacion/29069///titulacionUnidadServicio/145/gradoNivelServicio/23/inscribir"
-    driver.get(classroom)
-    time.sleep(6)
-    button_element = driver.find_element(By.XPATH,'//*[@id="$index"]')    
-    button_element.click()
-    for element in lector:
-        os.system("cls")
-        print("Data to analize: ")
-        element = element[0].split(";")
-        driver.get(classroom)# Section Student
-        print(classroom+" \n")
-        time.sleep(4)
-        driver.get(listStuden)
-        print("Seach to correct Data: " + element[2] +", " +element[1] + "  "+ element[3])        
-        time.sleep(2)
-        try:
-            input_element = driver.find_element(By.XPATH, '//*[@id="id_search"]')
-            input_element.send_keys(element[3])
-        except:
-            print("id_search no encontrado")
-        
-        time.sleep(2)
-        try:
-            input_element = driver.find_element(By.XPATH, '//*[@id="page-content"]/div/div/div/div/form/table/tbody/tr[1]/td[1]/input')
-            input_element.click()                                                                     
-        except:
-            print("Element no find")
-            listNoFind.append(element)
-        #input("si cargo el site, presione enter \n")
-        time.sleep(2)
-        button_element = driver.find_element(By.XPATH,'//*[@id="form-buttons"]/div/button')
-        button_element.click()
-        time.sleep(2)  
-        try:
-            button_element = driver.find_element(By.XPATH,'//*[@id="$index"]')    
-            button_element.click()
-            input_element = driver.find_element(By.XPATH, '//*[@id="repitente"]')
-            input_element.send_keys("No")
-        except:
-            pass
-        time.sleep(2)       
-        #confirm
-        try:
-            button_element = driver.find_element(By.XPATH,'//*[@id="form-buttons"]/div/button/span')
-            button_element.click()
-            time.sleep(2)
-            button_element = driver.find_element(By.XPATH,'//*[@id="form-buttons"]/div/button/span')
-            button_element.click()
-        except:
-            print("btn no encontrados")
-input("press to End") 
-print(listNoFind)
-with open("listNoFound.csv", "w") as archivo:
-    for elemento in listNoFind:
-        archivo.write(f"{elemento}\n")
+def main():
+    driver =login(user, password, site)
+    os.system("cls")
+    listNoFind = []
+    with open("migrate.csv", "r") as f:
+        lector = csv.reader(f)
+        print("Start data enter")
+        driver.get("https://sge.salta.gob.ar/ui/#!/home/unidad/18239/organizacionCursada/titulacion/")
+        input("si cargo el site, presione enter \n")
+        classroom = "https://sge.salta.gob.ar/ui/#!/home/unidad/18239/inscripciones/titulacion/division/29071/titulaciones"
+        listStuden = "https://sge.salta.gob.ar/ui/#!/home/unidad/18239/inscripcion/titulacion/29071///titulacionUnidadServicio/145/gradoNivelServicio/21/inscribir"
+        driver.get(classroom)
+        time.sleep(6)
+        selenium_Button('//*[@id="$index"]')
+       
+        for element in lector:
+            os.system("cls")
+            print("Data to analize: ")
+            element = element[0].split(";")
+            driver.get(classroom)# Section Student
+            print(classroom+" \n")
+            time.sleep(4)
 
+            driver.get(listStuden)
+            print("Seach to correct Data: " + element[2] +", " +element[1] + "  "+ element[3])        
+            time.sleep(2)
+
+            selenium_input('//*[@id="id_search"]',element[3])          
+            time.sleep(2)
+
+            if(not selenium_Button('//*[@id="page-content"]/div/div/div/div/form/table/tbody/tr[1]/td[1]/input')):
+                listNoFind.append(element)
+                            
+            #input("si cargo el site, presione enter \n")
+            time.sleep(2)
+            selenium_Button('//*[@id="form-buttons"]/div/button')
+           
+            time.sleep(2)
+            selenium_Button('//*[@id="$index"]')  
+            selenium_input('//*[@id="repitente"]', "No")
+            
+            time.sleep(2)       
+            selenium_Button('//*[@id="form-buttons"]/div/button/span')
+            time.sleep(2)
+            selenium_Button('//*[@id="form-buttons"]/div/button/span')
+            
+    input("press to End") 
+    print(listNoFind)
+    with open("listNoFound.csv", "w") as archivo:
+        for elemento in listNoFind:
+            archivo.write(f"{elemento}\n")
+main()
 
 
         
