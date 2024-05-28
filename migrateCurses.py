@@ -28,8 +28,8 @@ def main():
         print("Start data enter")
         driver.get("https://sge.salta.gob.ar/ui/#!/home/unidad/18239/organizacionCursada/titulacion/")
         input("si cargo el site, presione enter \n")
-        classroom = "https://sge.salta.gob.ar/ui/#!/home/unidad/18239/inscripciones/titulacion/division/29071/titulaciones"
-        listStuden = "https://sge.salta.gob.ar/ui/#!/home/unidad/18239/inscripcion/titulacion/29071///titulacionUnidadServicio/145/gradoNivelServicio/21/inscribir"
+        classroom = "https://sge.salta.gob.ar/ui/#!/home/unidad/18239/inscripciones/titulacion/division/29073/titulaciones"
+        listStuden = "https://sge.salta.gob.ar/ui/#!/home/unidad/18239/inscripcion/titulacion/29073///titulacionUnidadServicio/145/gradoNivelServicio/22/inscribir"
         driver.get(classroom)
         time.sleep(6)
         selenium_Button('//*[@id="$index"]')
@@ -46,11 +46,12 @@ def main():
             print("Seach to correct Data: " + element[2] +", " +element[1] + "  "+ element[3])        
             time.sleep(2)
 
-            selenium_input('//*[@id="id_search"]',element[3])          
-            time.sleep(2)
+            if(element[3]!=""):
+                selenium_input('//*[@id="id_search"]',element[3])          
+                time.sleep(2)
 
-            if(not selenium_Button('//*[@id="page-content"]/div/div/div/div/form/table/tbody/tr[1]/td[1]/input')):
-                listNoFind.append(element)
+                if(not selenium_Button('//*[@id="page-content"]/div/div/div/div/form/table/tbody/tr[1]/td[1]/input')):
+                    listNoFind.append(element)
                             
             #input("si cargo el site, presione enter \n")
             time.sleep(2)
