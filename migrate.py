@@ -1,7 +1,7 @@
 """"" Autor: Ariel Diaz
      https://infrasoft.com.ar/
      Salta Argentina 
-     Tel: (+549) 3872204925  
+     Tel: (+549) 387 220 49 25  
      Licence: Creative Commons 
 """""
 from selenium import webdriver

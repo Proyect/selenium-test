@@ -30,11 +30,13 @@ def selenium_input(identify="", value="",by="XPATH"):
             input_element = driver.find_element(By.XPATH, identify)            
         
         if(by=="ID"):
-            input_element = driver.find_element(By.ID, identify)
-            
+            input_element = driver.find_element(By.ID, identify)            
         
         if(by=="NAME"):
             input_element = driver.find_element(By.NAME, identify)
+
+        if(by=="CLASS"):
+            input_element = driver.find_element(By.CLASS_NAME, identify)
 
         input_element.send_keys(value)
         return True

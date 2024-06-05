@@ -57,7 +57,9 @@ def main():
             print("Student: " + element[1]+" "+element[2]+" "+element[0])
             try:
                 input_element = driver.find_element(By.XPATH, '//*[@id="renovantes_filter"]/label/input')
-                input_element.send_keys(element[0])                
+                dni = element[2]
+                dni = dni[2:10]
+                input_element.send_keys(dni)                
                 val = driver.find_element(By.NAME, 'cuit[]').get_attribute("value")
                    
             except:
