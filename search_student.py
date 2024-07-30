@@ -19,7 +19,7 @@ user = config('sinide_user')
 password = config('sinide_password')
 site = config('sinide_url')
 
-driver =login(user, password, site)
+driver =login(user, password, site) # student in course
 os.system("cls")
 listNoFind = []
 with open("migrate.csv", "r") as f:
@@ -33,8 +33,8 @@ with open("migrate.csv", "r") as f:
         driver.get("https://sge.salta.gob.ar/ui/#!/home/unidad/18239/alumnos")# Section Student
         time.sleep(2)
         #input("si cargo el site, presione enter \n")
-        dni = element[2]
-        dni = dni[2:10]
+        dni = element[3]
+        #dni = dni[2:10]
         selenium_input('//*[@id="id_search"]', dni+"\n")
        
         print("Seach to correct Data: " + element[0] +", " +element[1] + "  "+ element[2])
@@ -42,6 +42,7 @@ with open("migrate.csv", "r") as f:
         if(not selenium_Button('//*[@id="no-data"]')):
             listNoFind.append(element)
         time.sleep(2)
+        input("Ingreso correctament")
         driver.refresh()
         os.system("cls")
 input("press to End") 

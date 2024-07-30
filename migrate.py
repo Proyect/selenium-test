@@ -31,8 +31,7 @@ with open("migrate.csv", "r") as f:
         print("Data to analize: ")
         element = element[0].split(";")
         #print(element)
-        driver.get("https://sge.salta.gob.ar/ui/#!/home/unidad/18239/alumnos")# Section Student
-        #print("https://sge.salta.gob.ar/ui/#!/home/unidad/18239/alumnos \n")
+        driver.get("https://sge.salta.gob.ar/ui/#!/home/unidad/18239/alumnos")# Section Student        
         time.sleep(4)
         #input("si cargo el site, presione enter \n")
         selenium_input("id_search", element[3],"ID")
