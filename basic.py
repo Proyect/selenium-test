@@ -85,7 +85,11 @@ def selenium_Button(identify="",by="XPATH"):
                 EC.presence_of_element_located((By.NAME, identify))
             )
             button_element = driver.find_element(By.NAME, identify)
-
+        if(by=="CLASS"):
+            button_element = WebDriverWait(driver, 3).until(
+                EC.presence_of_element_located((By.CLASS_NAME, identify))
+            )
+            button_element = driver.find_element(By.CLASS_NAME, identify)
         button_element.click()
         return True
     except:

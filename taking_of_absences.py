@@ -11,21 +11,32 @@ from decouple import config
 from basic import *
 import os 
 
-user = config('sinide_user')
-password = config('sinide_password')
+user = "20182306070" #config('sinide_user')
+password =  "SGE20182306070"    #config('sinide_password')
 site = config('sinide_url')
 
 def main():
     driver =login(user, password, site)
     os.system("cls")
-    input("Presione enter si ingreso al sitio")
     link = config("sinide_date_search")
-    driver.get(link)
-    time.sleep(5)
-    selenium_Button('//*[@id="page-content"]/div/div/div/div/div[2]/div/table/tbody/tr[1]/td[6]/div/button')   
-    time.sleep(2)
-    for element in range(50):
-        selenium_Button('/html/body/div[1]/div/div/div/form/div[2]/div[1]/div/div/button')    
-        time.sleep(3)       
-    input("finished")
+    link2 = config("sinide_date_search2")
+    link3 = config("sinide_date_search3")
+    link_group = [link, link2, link3]
+    for i in link_group:
+        input("Presione enter si ingreso al sitio")    
+        driver.get(i)
+        time.sleep(5)
+        if(selenium_Button('//*[@id="page-content"]/div/div/div/div/div[2]/div/table/tbody/tr[1]/td[5]/div/button')):
+            time.sleep(3)
+        else:
+            input("haga click en el primer alumno a tomar asistencia")
+        for element in range(50):
+            if(selenium_Button('/html/body/div[1]/div/div/div/form/div[2]/div[1]/div/div/button')):#
+                time.sleep(2)       
+            else:
+                break
+
+        opt = input("Presione Enter para grabar y continuar con el siguiente curso \n Presione 1 y Enter para salir del programa")
+        if(opt =="1"):
+            break
 main()

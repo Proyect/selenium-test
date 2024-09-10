@@ -33,7 +33,7 @@ with open("migrate.csv", "r") as f:
         driver.get("https://sge.salta.gob.ar/ui/#!/home/unidad/18239/alumnos")# Section Student
         time.sleep(2)
         #input("si cargo el site, presione enter \n")
-        dni = element[3]
+        dni = element[0]
         #dni = dni[2:10]
         selenium_input('//*[@id="id_search"]', dni+"\n")
        
