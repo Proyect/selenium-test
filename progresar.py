@@ -1,5 +1,4 @@
-""""" Autor: Ariel Diaz
-     https://infrasoft.com.ar/
+""""" Autor: Ariel Diaz     
      Salta Argentina 
      Tel: (+54) 9 387 2204925  
      Licence: Creative Commons 
@@ -41,44 +40,56 @@ def main():
         input("Open the insert data \n")
         selenium_Button('//*[@id="navbarCollapse"]/ul/li[2]/a')
         time.sleep(2)
-        selenium_Button('//*[@id="navbarCollapse"]/ul/li[2]/ul/li[3]/a')        
+        selenium_Button('//*[@id="navbarCollapse"]/ul/li[2]/ul/li[5]/a')        
         time.sleep(2)
         
         for element in lector:
             os.system("cls")
             print("Data to analize: ")
             element = element[0].split(";")
-            print("Student: " + element[1]+" "+element[2]+" "+element[0])
+            print("Student: " + element[1]+" "+element[2])
             try:
                 input_element = driver.find_element(By.XPATH, '//*[@id="renovantes_filter"]/label/input')
-                dni = element[2]
+                dni = element[0]
                 #dni = dni[2:10]
                 input_element.send_keys(dni)                
                 val = driver.find_element(By.NAME, 'cuit[]').get_attribute("value")
 
-                selenium_Button('//*[@id="nivel_educativo20482776583"]'+val) 
-                selenium_Button('//*[@id="nivel_educativo'+val+'"]/option[2]')
+                selenium_Button('//*[@id="nivel_educativo_03'+val+'"]') 
+                selenium_Button('//*[@id="nivel_educativo_03'+val+'"]/option[2]')
                 time.sleep(1)
-                selenium_Button('//*[@id="asiste_regularmente'+val+'"]')
-                selenium_Button('//*[@id="asiste_regularmente'+val+'"]/option[2]')
+
+                selenium_Button('//*[@id="finalizo_alumno_regular_03'+val+'"]')
+                selenium_Button('//*[@id="finalizo_alumno_regular_03'+val+'"]/option[2]')
                 time.sleep(1)
-                selenium_Button('//*[@id="expresa_interes_convivencia_escolar'+val+'"]')
-                selenium_Button('//*[@id="expresa_interes_convivencia_escolar'+val+'"]/option[2]') 
+                
+                selenium_Button('//*[@id="anio_curso_03'+val+'"]')
+                curso = str(int (element[2])+1)
+                selenium_Button('//*[@id="anio_curso_03'+val+'"]/option['+curso+']')
                 time.sleep(1)
-                selenium_Button('//*[@id="anio_cursa_actualmente'+val+'"]')
-                curso = str(int (element[3])+1)
-                selenium_Button('//*[@id="anio_cursa_actualmente'+val+'"]/option['+curso+']')
-                time.sleep(1)
-                selenium_Button('//*[@id="espacios_pendientes_anios_anteriores'+val+'"]')
-                selenium_Button('//*[@id="espacios_pendientes_anios_anteriores'+val+'"]/option[2]')
-                time.sleep(1)
-                selenium_Button('//*[@id="espacios_pendientes_anio_actual'+val+'"]')
-                selenium_Button('//*[@id="espacios_pendientes_anio_actual'+val+'"]/option[2]')
+                
+                selenium_Button('//*[@id="en_que_nivel_03'+val+'"]')
+                if(element[2] >2):
+                    selenium_Button('//*[@id="en_que_nivel_03'+val+'"]/option[5]') 
+                else:
+                    selenium_Button('//*[@id="en_que_nivel_03'+val+'"]/option[6]')           
+                time.sleep(2)                
+                
+                selenium_Button('//*[@id="curso_ultimo_anio_este_anio_03'+val+'"]')
+                if(element[2]==5):
+                    selenium_Button('//*[@id="curso_ultimo_anio_este_anio_03'+val+'"]/option[2]')
+                    time.sleep(1)
+                    selenium_Button('//*[@id="egreso_sin_adeudar_03'+val+'"]')
+                    selenium_Button('//*[@id="egreso_sin_adeudar_03'+val+'"]/option[2]')
+                else:
+                    selenium_Button('//*[@id="curso_ultimo_anio_este_anio_03'+val+'"]/option[3]')                    
+                time.sleep(2)                
+                
             except:
                 print("No se pudo cargar el DNI")
                 listNoFind.append(element)
             time.sleep(1)                                  
-            #input("presionar boton")
+            input("Valores correctamente cargados?")
             selenium_Button('//*[@id="Form2"]/center/button')            
             time.sleep(1)
             selenium_Button('/html/body/div/div/h2/a') 

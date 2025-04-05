@@ -6,3 +6,4 @@ setup(
     description = "Mi aplicación con Selenium",
     executables = [Executable("taking_of_absences.py")]
 )
+# python setup.py build

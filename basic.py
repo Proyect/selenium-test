@@ -23,8 +23,8 @@ def login(user, password, site):
     button_element.click()
     print("Done Login.")
     time.sleep(3)
-    button_element = driver.find_element(By.XPATH, value='//*[@id="page-content-wrapper"]/div/div/div/sge-table-search/div/div/div[3]/table/tbody/tr[1]/td[3]')
-    button_element.click()
+    selenium_Button('//*[@id="page-content-wrapper"]/div/div/div/sge-table-search/div/div/div[3]/table/tbody/tr[1]/td[3]')
+    
     time.sleep(3)
     selenium_Button('//*[@id="bs-example-navbar-collapse-1"]/sge-ul-menu-bar-us/ul[1]/li[1]/a/span[3]')
     selenium_Button('//*[@id="bs-example-navbar-collapse-1"]/sge-ul-menu-bar-us/ul[1]/li[1]/ul/li[3]/a')
