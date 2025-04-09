@@ -43,7 +43,7 @@ def main():
         selenium_Button('//*[@id="btnAgregarPlanilla"]')
         input("presione luego de seleccionar la planilla \n")
         os.system("cls")
-        #selenium_Button('//*[@id="ddlTurnos"]/option[6]')
+        selenium_Button('//*[@id="ddlTurnos"]/option[6]')
         print("cargando datos: "+ curso)
         time.sleep(2)
         selenium_Button('//*[@id="btnPlanillaDetalle"]')
@@ -59,13 +59,21 @@ def main():
                 time.sleep(2)
                 if(driver.find_element(By.XPATH, '//*[@id="txtCurso"]').get_attribute("value") == ""):
                     selenium_input('//*[@id="txtCurso"]', curso)
-                selenium_Button('//*[@id="ddlImporte"]')                
+                selenium_Button('//*[@id="ddlImporte"]') 
+                if(driver.find_element(By.XPATH, '//*[@id="txtNombre"]').get_attribute("value") == ""):
+                    selenium_Button('/html/body/div[2]/div[7]/div/button')
+                    selenium_input('//*[@id="txtNombre"]', element[1]+", "+element[2])
+                    selenium_input('//*[@id="txtFechaNac"]', element[6])
+                               
             except:
                 listNoFind.append(element)
                 print("No find: " + element[3])
             time.sleep(4)
-            selenium_Button('//*[@id="btnAgregarFila"]')
-            
-            #input("Verificar si se agrego el alumno \n")
+            selenium_Button('//*[@id="btnAgregarFila"]')            
+            input("Verificar si se agrego el alumno \n")
             os.system("cls")
+        print(listNoFind)
+        with open("listNoFound.csv", "w") as archivo:
+            for elemento in listNoFind:
+                archivo.write(f"{elemento}\n")        
 main()
